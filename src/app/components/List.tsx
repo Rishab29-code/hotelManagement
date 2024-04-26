@@ -27,13 +27,13 @@ const db = getFirestore(app);
 
 const HotelList = () => {
 
-    const [myArray, setMyarray] = useState([])
+    const [myArray, setMyarray] = useState([] as any[])
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const querySnapshot = await getDocs(collection(db, 'Hotels'));
                 console.log("query", querySnapshot)
-                const hotelList= []
+                const hotelList:any[]=[]
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
                     hotelList.push({ id: doc.id, ...data });
@@ -68,7 +68,7 @@ const HotelList = () => {
                             <td style={{ padding: "8px", border: "1px solid #ccc" }}>{item.hotelName}</td>
                             <td style={{ padding: "8px", border: "1px solid #ccc" }}>{item.hotelEmailId}</td>
                             <td style={{ padding: "8px", border: "1px solid #ccc" }}>
-                                <Link href={`/hotel/${encodeURIComponent(item.id)}`} onClick={() => setIsEdit(true)} style={{ textDecoration: "none", color: "blue" }}>Edit</Link>
+                                <Link href={`/hotel/${encodeURIComponent(item.id)}`} style={{ textDecoration: "none", color: "blue" }}>Edit</Link>
                             </td>
                         </tr>
                     ))}

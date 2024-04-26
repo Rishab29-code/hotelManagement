@@ -23,7 +23,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 
-export default function Page({ params }) {
+export default function Page({ params }:{params:any}) {
 
     const [hotelInfo, setHotelInfo] = useState(new HotelInfoDetails());
     const { id } = params
@@ -44,7 +44,7 @@ export default function Page({ params }) {
                     const docRef = doc(db, 'Hotels', id);
                     const docSnap = await getDoc(docRef);
                     if (docSnap.exists()) {
-                        const data: HotelInfoDetails = docSnap.data()
+                        const data: any = docSnap.data()
                         setHotelInfo({ ...data });
 
                     } else {
@@ -86,7 +86,7 @@ export default function Page({ params }) {
             const updatedDocRef = doc(db, 'Hotels', id);
             const updatedDocSnap = await getDoc(updatedDocRef);
             if (updatedDocSnap.exists()) {
-                const updatedData: HotelInfoDetails = updatedDocSnap.data();
+                const updatedData: any = updatedDocSnap.data();
                 setHotelInfo({ ...updatedData });
             }
         } catch (error) {
